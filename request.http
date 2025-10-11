@@ -1,0 +1,22 @@
+GET http://localhost:3000
+
+###
+GET http://localhost:3000/hello-value/not-value
+
+### valid query
+GET http://localhost:3000/int/123
+
+### invalid query
+GET http://localhost:3000/int/123.45
+
+### pagenation
+GET http://localhost:3000/paged?size=10&total=100
+
+### pagenation - invalid (size is negative)
+GET http://localhost:3000/paged?size=-10&total=100
+
+### get user by id - valid
+GET http://localhost:3000/users/1
+
+### get user by id - invalid (not found)
+GET http://localhost:3000/users/999
