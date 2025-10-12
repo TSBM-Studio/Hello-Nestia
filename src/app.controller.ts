@@ -15,6 +15,7 @@ interface IUser {
   id: number;
   role: 'admin' | 'editor' | 'user';
 }
+
 const userSet = new Set<IUser>([
   { id: 1, role: 'admin' },
   { id: 2, role: 'editor' },
