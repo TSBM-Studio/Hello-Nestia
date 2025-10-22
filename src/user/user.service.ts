@@ -11,9 +11,11 @@ export class UserService {
     @InjectRepository(User) private userRepository: Repository<User>,
   ) {}
 
-  create(createUserDto: CreateUserDto) {
-    const user = this.userRepository.create(createUserDto);
-    return this.userRepository.save(user);
+  async create(createUserDto: CreateUserDto) {
+    return this.userRepository.manager.transaction(async (manager) => {
+      const user = manager.create(User, createUserDto);
+      return await manager.save(user);
+    });
   }
 
   findAll() {
@@ -25,10 +27,15 @@ export class UserService {
   }
 
   update(id: string, updateUserDto: UpdateUserDto) {
-    return this.userRepository.update(id, updateUserDto);
+    return this.userRepository.manager.transaction(async (manager) => {
+      await manager.update(User, id, updateUserDto);
+      return await manager.findOneBy(User, { id });
+    });
   }
 
   remove(id: string) {
-    return this.userRepository.delete(id);
+    return this.userRepository.manager.transaction(async (manager) => {
+      await manager.delete(User, { id });
+    });
   }
 }
