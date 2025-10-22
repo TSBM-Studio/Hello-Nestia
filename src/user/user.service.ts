@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
+import { UserAspect } from './user.aspect';
 
 @Injectable()
 export class UserService {
@@ -11,6 +12,7 @@ export class UserService {
     @InjectRepository(User) private userRepository: Repository<User>,
   ) {}
 
+  @UserAspect.afterReturning()
   async create(createUserDto: CreateUserDto) {
     return this.userRepository.manager.transaction(async (manager) => {
       const user = manager.create(User, createUserDto);

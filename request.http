@@ -20,3 +20,11 @@ GET http://localhost:3000/users/1
 
 ### get user by id - invalid (not found)
 GET http://localhost:3000/users/999
+
+### create user - valid
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+  "name": "John Doe"
+}
