@@ -7,7 +7,6 @@ import {
 } from '@nestia/core';
 import { Controller, NotFoundException } from '@nestjs/common';
 import { tags } from 'typia';
-import { AppService } from './app.service';
 import { IPage } from './common/page';
 import { IArticle } from './dto/IArticle';
 
@@ -24,12 +23,10 @@ const userSet = new Set<IUser>([
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
-
   // NestJS 의 기본적인 컨트롤러 사용법과 비슷하여 적응이 쉬웠음
   @TypedRoute.Get()
   getHello(): string {
-    return this.appService.getHello();
+    return 'Hello Nestia!';
   }
 
   @TypedRoute.Get('/hello-value/:value')
@@ -58,7 +55,7 @@ export class AppController {
 
   // Exception 표시에 어떤 오류가 발생하는지 제네릭에 넣지 않으면 never 타입으로 된다는 점이 인상깊었음
   // 반드시 여기엔 어떤 에러가 발생하는지 표시하도록 강제하는 느낌
-  @TypedRoute.Get('/users/:id')
+  @TypedRoute.Get('/mock-users/:id')
   @TypedException<NotFoundException>({
     status: 404,
     description: 'User not found',
