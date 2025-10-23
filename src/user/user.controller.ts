@@ -1,5 +1,5 @@
 import { TypedBody, TypedParam, TypedRoute } from '@nestia/core';
-import { Controller, Param } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserService } from './user.service';
@@ -19,7 +19,7 @@ export class UserController {
   }
 
   @TypedRoute.Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@TypedParam('id') id: string) {
     return this.userService.findOne(id);
   }
 
