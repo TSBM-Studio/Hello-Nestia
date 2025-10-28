@@ -8,6 +8,8 @@ const NESTIA_CONFIG: INestiaConfig = {
     const app = await NestFactory.create(AppModule);
     return app;
   },
+  output: 'src/api',
+  e2e: 'test',
   swagger: {
     openapi: '3.1',
     output: 'dist/swagger.json',

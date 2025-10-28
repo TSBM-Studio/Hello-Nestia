@@ -10,7 +10,7 @@ import { tags } from 'typia';
 import { IPage } from './common/page';
 import { IArticle } from './dto/IArticle';
 
-interface IUser {
+export interface IUser {
   id: number;
   role: 'admin' | 'editor' | 'user';
 }
